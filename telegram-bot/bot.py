@@ -20,6 +20,10 @@ logger = logging.getLogger(__name__)
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8000")
 
+# Remove port from backend URL if it's a deployed service
+if BACKEND_URL.startswith("https://"):
+    BACKEND_URL = BACKEND_URL.rstrip("/")
+
 logger.info(f"Telegram Token: {TELEGRAM_TOKEN[:20]}..." if TELEGRAM_TOKEN else "No token found!")
 logger.info(f"Backend URL: {BACKEND_URL}")
 
